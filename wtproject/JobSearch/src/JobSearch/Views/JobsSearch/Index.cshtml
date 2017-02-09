@@ -1,0 +1,88 @@
+@model IEnumerable<Job>
+
+@{
+    ViewData["Title"]="Search Job";
+}
+
+<div class="container">
+    <div class"row">
+
+        <!-- filter area starts -->
+        <div class="col-md-3">
+            <h4 class="my_recom_title">Customize your filter?</h4>
+            <hr class="myhr">
+
+            <form role="form" class="my_form" asp-action="Index" method="get">
+
+                <div class="form-group">
+                    <label>
+                        Search For this keyword for Job
+                    </label>
+                    <input type="text" class="form-control" name="searchString">
+                </div>
+
+                <div class="form-group">
+                    <label>In the Location</label>
+                    <input type="text" name="location" class="form-control ">
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Job Type</label>
+                    <div >
+                        <select asp-items="@Html.GetEnumSelectList<JobType>()" class="form-control" name="jobType"></select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Salary</label>
+                    <div >
+                        <select asp-items="@Html.GetEnumSelectList<Salary>()" name="salary" class="form-control"></select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <input type="submit" class="btn btn-default m-t-14" value="Filter">
+                    </label>
+                </div>
+
+            </form>
+
+            <hr class="myhr">
+        
+        </div>
+        <!-- filter area ends -->
+
+        <!--Job Display Panel-->
+        <div class="col-md-9"  >
+             <!-- recommended jobs area starts -->
+            <ul class="myList">
+                @foreach(var item in Model)
+                {
+                    <li style="display: list-item;">
+                        <div class="box">
+                            @*
+                            <div class="thumbnail">Thumbnail of the company</div>
+                            *@
+                            <div class="text-col">
+                                <h4><a asp-controller="Job" asp-action="Details" asp-route-id="@item.JobID"> @item.Title [@item.JobType] </a></h4>
+                                <h5><a asp-controller="Employer" asp-action="Index">Name of the company</a></h5>
+                                <h5>Address of the Company</h5>
+                                <p>@item.Description</p>
+
+                                @*<p>@Html.DisplayFor(model=>item.Employer.CompanyName)</p>*@
+
+                                <p>@item.Salary a month</p>
+                                <p>No of Post(s) available: @item.NoOfVacancies</p>
+                                <p>Deadline: @item.Deadline</p>
+                            </div>
+                        </div>
+                    </li>       
+                }
+            </ul>
+        </div>
+        <!--End of Job Display Panel-->
+        
+    </div>
+
+</div>
