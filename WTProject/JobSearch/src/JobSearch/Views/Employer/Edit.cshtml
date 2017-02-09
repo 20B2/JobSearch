@@ -1,0 +1,83 @@
+@model EmployerViewModel
+
+
+@{
+    ViewData["Title"] = "Edit Profile";
+
+}
+<div class="panel mb25">
+    <div class="panel-heading border">
+       
+    </div>
+    <div class="panel-body">
+        <div class="row no-margin">
+            <div class="col-lg-12">
+                <form asp-action="Edit" class="form-horizontal bordered-group" role="form">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                 
+                    <div class="form-group">
+                        <label asp-for="UserName" class="col-sm-2 control-label"></label>
+                        <div class="col-sm-10">
+                            <input asp-for="UserName" class="form-control" />
+                            <span asp-validation-for="UserName" class="text-danger" />
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label asp-for="Email" class="col-sm-2 control-label"></label>
+                        <div class="col-sm-10">
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger" />
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label asp-for="CompanyName" class="col-sm-2 control-label"></label>
+                        <div class="col-sm-10">
+                            <input asp-for="CompanyName" class="form-control" />
+                            <span asp-validation-for="CompanyName" class="text-danger" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Address" class="col-sm-2 control-label"></label>
+                        <div class="col-sm-10">
+                            <input asp-for="Address" class="form-control" />
+                            <span asp-validation-for="Address" class="text-danger" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="CompanyDescription" class="col-sm-2 control-label"></label>
+                        <div class="col-sm-10">
+                            <textarea asp-for="CompanyDescription" class="form-control"></textarea>
+                            <span asp-validation-for="CompanyDescription" class="text-danger" />
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label asp-for="Phone" class="col-sm-2 control-label"></label>
+                        <div class="col-sm-10">
+                            <input type="text" asp-for="Phone" class="form-control" />
+                            <span asp-validation-for="Phone" class="text-danger" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <input type="submit" value="Update" class="btn btn-default" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
