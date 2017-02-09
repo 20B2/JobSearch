@@ -4,12 +4,13 @@ using JobSearch.Models;
 using JobSearch.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace JobSearch.Controllers
 {
+    [Authorize]
     public class JobController : Controller
     {
         private readonly IJobInfo _jobInfo;
@@ -32,6 +33,9 @@ namespace JobSearch.Controllers
 
         public IActionResult Create()
         {
+            var user = GetCurrentUserAsync();
+            if(user == null)
+                return RedirectToAction("Index", "Account");
             return View();
         }
 

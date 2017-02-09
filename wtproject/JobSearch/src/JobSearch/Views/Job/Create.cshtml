@@ -1,71 +1,84 @@
 @model Job
-
+@*
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+*@
 @{
     ViewData["Title"]="Post a Job";
 }
-
-<form asp-action="Create" method="POST" class="form-horizontal" role="form">
-        <div class="form-group">
-            <legend>@ViewData["Title"]</legend>
-        </div>
-
-        <div asp-validation-summary="All" class="text-danger"></div>
-        
-        <div class="col-md-5 col-sm-6 col-xs-12">
-            <fieldset class="col-md-12">
-                <legend>Job Details</legend>
-                <div class="form-group">
-                    <label asp-for="Title" class="control-label"></label>
-                    <div >
-                        <input asp-for="Title" class="form-control"/>
-                        <span asp-validation-for="Title" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label asp-for="JobType" class="control-label"></label>
-                    <div >
-                        <select asp-for="JobType" asp-items="@Html.GetEnumSelectList<JobType>()" class="form-control"></select>
-                        <span asp-validation-for="JobType" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="Salary" class="control-label"></label>
-                    <div >
-                        <input asp-for="Salary" class="form-control" />
-                        <span asp-validation-for="Salary" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="Description" class="control-label"></label>
-                    <div >
-                        <textarea asp-for="Description"  class="form-control"></textarea>
-                        <span asp-validation-for="Description" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="NoOfVacancies" class="control-label"></label>
-                    <div >
-                        <input asp-for="NoOfVacancies" class="form-control" />
-                        <span asp-validation-for="NoOfVacancies" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="Deadline" class="control-label"></label>
-                    <div >
-                        <input type="date" asp-for="Deadline" class="form-control"/>
-                        <span asp-validation-for="Deadline" class="text-danger"></span>
-                    </div>
-                </div>
-            </fieldset>
-        </div> 
-
-        <div class="form-group">
-            <div class="col-sm-10 col-sm-offset-2">
-                <button type="submit" class="btn btn-primary">Submit</button>
+@*
+@if(SignInManager.IsSignedIn(User))
+{
+*@    <form asp-action="Create" method="POST" class="form-horizontal" role="form">
+            <div class="form-group">
+                <legend>@ViewData["Title"]</legend>
             </div>
-        </div>
-</form>
+
+            <div asp-validation-summary="All" class="text-danger"></div>
+            
+            <div class="col-md-5 col-sm-6 col-xs-12">
+                <fieldset class="col-md-12">
+                    <legend>Job Details</legend>
+                    <div class="form-group">
+                        <label asp-for="Title" class="control-label"></label>
+                        <div >
+                            <input asp-for="Title" class="form-control"/>
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="JobType" class="control-label"></label>
+                        <div >
+                            <select asp-for="JobType" asp-items="@Html.GetEnumSelectList<JobType>()" class="form-control"></select>
+                            <span asp-validation-for="JobType" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Salary" class="control-label"></label>
+                        <div >
+                            <input asp-for="Salary" class="form-control" />
+                            <span asp-validation-for="Salary" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label"></label>
+                        <div >
+                            <textarea asp-for="Description"  class="form-control"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="NoOfVacancies" class="control-label"></label>
+                        <div >
+                            <input asp-for="NoOfVacancies" class="form-control" />
+                            <span asp-validation-for="NoOfVacancies" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Deadline" class="control-label"></label>
+                        <div >
+                            <input type="date" asp-for="Deadline" class="form-control"/>
+                            <span asp-validation-for="Deadline" class="text-danger"></span>
+                        </div>
+                    </div>
+                </fieldset>
+            </div> 
+
+            <div class="form-group">
+                <div class="col-sm-10 col-sm-offset-2">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+    </form>
+@*}
+else
+{
+    <div>
+        You need to sign in to post a job. <a asp-controller="Account" asp-action="Login" >Sign in to post a job</a>
+    </div>
+}
+*@
